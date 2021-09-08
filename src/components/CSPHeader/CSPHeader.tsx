@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import cspHeaderConfig from './utils/cspHeaderConfig';
 import { changeOrganization, signIn, signOut } from './utils/csp';
+import { masterPaToken } from './constants/mock-token';
 
 /**
  * All these imports come from the CSP Angular microfrontend. They are bundled as a separate entity
@@ -22,7 +23,7 @@ const CSPHeader = () => {
   const headerRef = useRef<any>(null);
 
   // Get customer auth token
-  const token = '';
+  const token = ''; // masterPaToken;
 
   // Configure it
   useEffect(() => {

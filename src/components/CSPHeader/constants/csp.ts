@@ -24,14 +24,11 @@ export const CSP_CLOUD_SERVICE_BILLING_URL = `${CSP_DOMAIN}/csp/gateway/portal/#
 
 export const CSP_STAGING_FEATURE_FLAG_INTEGRATION_KEY =
   'aHR0cHM6Ly9jb25zb2xlLXN0Zy5jbG91ZC52bXdhcmUuY29tfHxhUkJXMjMzcTRBUGtid3JCaDc3bg==';
-
 export const CSP_PRODUCTION_FEATURE_FLAG_INTEGRATION_KEY =
   'aHR0cHM6Ly9jb25zb2xlLmNsb3VkLnZtd2FyZS5jb218fDNWZ1UzeU1WYVczcUt3VXZuT0Ry';
 
-export const CSP_STAGING_SERVICE_ID = '6687fcc6-3417-4006-bf31-ce8c2ab536fc';
-
-export const CSP_PRODUCTION_SERVICE_ID = '9d32fcd2-88ca-46ab-940f-1f09b9788b6d';
+export const CSP_STAGING_SERVICE_ID = '3a7e4eb5-ac84-4041-a031-003be10e3c15';
+export const CSP_PRODUCTION_SERVICE_ID = '3a7e4eb5-ac84-4041-a031-003be10e3c15';
 
 export const CSP_STAGING_SERVICE_REF_LINK = `/csp/gateway/slc/api/definitions/external/${CSP_STAGING_SERVICE_ID}`;
-
 export const CSP_PRODUCTION_SERVICE_REF_LINK = `/csp/gateway/slc/api/definitions/external/${CSP_PRODUCTION_SERVICE_ID}`;
