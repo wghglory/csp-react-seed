@@ -10,6 +10,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Dev Setup
 
+### PORT
+
+.env.development:
+
+```
+HTTPS=true
+PORT=443
+HOST=pcdl-stg.vmware.com
+DANGEROUSLY_DISABLE_HOST_CHECK=true
+```
+
+`npm start` will have to use `sudo` for any port under 1024.
+
+> Make sure browser proxy is disabled.
+
 ### SSL
 
 https://stackoverflow.com/questions/10175812/how-to-generate-a-self-signed-ssl-certificate-using-openssl/10176685#10176685
