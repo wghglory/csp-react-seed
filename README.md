@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+`npx create-react-app csp-react-seed --template typescript`
+
+- create-react-app: 4.0.3
+- node: 16.8.0
+- npm: 7.21.0
+
 ## Available Scripts
 
 In the project directory, you can run:
