@@ -1,8 +1,10 @@
-/**
- * Constants for CSP integration
- */
+import { isProduction } from '../environment';
 
-import { isProduction } from '../utils/environment';
+export const CSP_AUTH_TOKEN = 'csp-auth-token';
+export const CSP_ID_TOKEN = 'csp-id-token';
+
+// TODO: remove mock
+export const IGNORE_CSP_HEADER_TOKEN = '__IGNORE_CSP_HEADER_TOKEN';
 
 // Login URL
 export const LOGIN_URL = '/auth/vmware';
@@ -32,3 +34,6 @@ export const CSP_PRODUCTION_SERVICE_ID = '3a7e4eb5-ac84-4041-a031-003be10e3c15';
 
 export const CSP_STAGING_SERVICE_REF_LINK = `/csp/gateway/slc/api/definitions/external/${CSP_STAGING_SERVICE_ID}`;
 export const CSP_PRODUCTION_SERVICE_REF_LINK = `/csp/gateway/slc/api/definitions/external/${CSP_PRODUCTION_SERVICE_ID}`;
+
+export const PUBLIC_DOMAIN = 'tac.bitnami.com';
+export const PRODUCTION_DOMAINS = [PUBLIC_DOMAIN, 'tac.k.vmw-01.bitnami.net'];

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import cspHeaderConfig from './utils/cspHeaderConfig';
-import { changeOrganization, signIn, signOut } from './utils/csp';
-import { masterPaToken } from './constants/mock-token';
+import cspHeaderConfig from './utils/csp-header-config';
+import { changeOrganization, signIn, signOut } from './utils/csp-util';
+
+import { authorize, getToken } from '../../core/auth/auth-client';
 
 /**
  * All these imports come from the CSP Angular microfrontend. They are bundled as a separate entity
@@ -9,8 +10,10 @@ import { masterPaToken } from './constants/mock-token';
  *
  * @ref https://ngx.eng.vmware.com/@vmw/csp-ngx-components/header/integration-guide#Non-Angular
  */
-import '@vmw/csp-header/csp-header';
 import '@clr/ui/clr-ui.min.css'; // import for styles !!!!!!!!!
+import '@clr/icons/clr-icons.min.css';
+import '@clr/icons/clr-icons.min.js';
+import '@vmw/csp-header/csp-header';
 
 // Custom styles required by the library
 // import styles from './CSPHeader.module.css';
@@ -23,7 +26,7 @@ const CSPHeader = () => {
   const headerRef = useRef<any>(null);
 
   // Get customer auth token
-  const token = ''; // masterPaToken;
+  const token = getToken()?.access_token;
 
   // Configure it
   useEffect(() => {
@@ -38,8 +41,13 @@ const CSPHeader = () => {
     ref.options = cspHeaderConfig.options;
 
     // Callbacks
-    ref.addEventListener('switchOrg', (e: any) => {
+    ref.addEventListener('switchOrg', async (e: any) => {
       changeOrganization(e.detail.id);
+
+      // TODO: update
+      await authorize(e.refLink);
+      // this.tokenService.authorize(org.refLink);
+      // await this.client.authorize(state, queryStringOrg || null);
     });
 
     ref.addEventListener('signOut', () => {
@@ -66,7 +74,7 @@ const CSPHeader = () => {
   // Add the token
   useEffect(() => {
     const { current: ref } = headerRef;
-    if (ref == null) {
+    if (ref === null) {
       return;
     }
 

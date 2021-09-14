@@ -1,5 +1,5 @@
-import { CSP_PRODUCTION_SERVICE_REF_LINK, CSP_STAGING_SERVICE_REF_LINK } from '../constants/csp';
-import { isProduction } from './environment';
+import { CSP_PRODUCTION_SERVICE_REF_LINK, CSP_STAGING_SERVICE_REF_LINK } from '../../../constants/csp';
+import { isProduction } from '../../../environment';
 
 /**
  * Build the configuration file for the CSP Header

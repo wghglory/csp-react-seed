@@ -10,18 +10,45 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Dev Setup
 
+1. Make sure in the /etc/hosts
+
+```
+127.0.0.1 pcdl-stg.vmware.com
+```
+
+2. Make sure client registry have redirectUris https://pcdl-stg.vmware.com:3300
+
+Postman, `PATCH https://console-stg.cloud.vmware.com/csp/gateway/am/api/orgs/{{service_org_id}}/oauth-apps/{{oauth_client}}` with `csp-auth-token`
+
+Request Body:
+
+```json
+{
+  "redirectUris": [
+    "https://ara-pcdl-dev.hs-portal.eng.vmware.com",
+    "https://pcdl-stg.vmware.com",
+    "https://pcdl-stg.vmware.com:3300",
+    "https://pcdl-stg.vmware.com/auth_callback",
+    "https://dev0.pcdl-decc.hs-portal.eng.vmware.com",
+    "https://oss-vcd.eng.vmware.com:18889",
+    "https://oss-vcd.eng.vmware.com:18889/auth_callback"
+  ]
+}
+```
+
 ### PORT
 
 .env.development:
 
 ```
 HTTPS=true
-PORT=443
+PORT=3300
 HOST=pcdl-stg.vmware.com
 DANGEROUSLY_DISABLE_HOST_CHECK=true
+REACT_APP_PRODUCTION_HOST=
 ```
 
-`npm start` will have to use `sudo` for any port under 1024.
+if PORT=443, you have to use `sudo` for any port under 1024. It's not convenient, so we will use 3300
 
 > Make sure browser proxy is disabled.
 
