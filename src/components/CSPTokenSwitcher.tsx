@@ -88,7 +88,7 @@ export default function CSPTokenSwitcher() {
           cursor: 'pointer',
         }}
       >
-        <CdsIcon shape='bars' onClick={toggle} size='24'></CdsIcon>
+        <CdsIcon shape='cog' onClick={toggle} size='24'></CdsIcon>
       </div>
 
       {/* <nav *ngIf="!loading && (mock.visible || !authService.isAuthenticated)"   */}
