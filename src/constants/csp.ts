@@ -5,6 +5,7 @@ export const CSP_ID_TOKEN = 'csp-id-token';
 
 // TODO: remove mock
 export const IGNORE_CSP_HEADER_TOKEN = '__IGNORE_CSP_HEADER_TOKEN';
+export const IS_DEFAULT_ROLE = '__IS_DEFAULT_ROLE';
 
 // Login URL
 export const LOGIN_URL = '/auth/vmware';

@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@cds/city": "^1.1.0",
-    "@cds/core": "5.2.0",
-    "@cds/react": "5.2.0",
+    "@cds/core": "5.4.0",
+    "@cds/react": "5.4.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
