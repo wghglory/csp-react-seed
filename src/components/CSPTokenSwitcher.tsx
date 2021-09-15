@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { CdsIcon } from '@cds/react/icon';
-import { ClarityIcons, cogIcon } from '@cds/core/icon';
+import { CdsIcon } from '@clr/react/icon';
+import { ClarityIcons, cogIcon } from '@clr/core/icon';
 import { CSP_AUTH_TOKEN, IGNORE_CSP_HEADER_TOKEN, IS_DEFAULT_ROLE } from '../constants/csp';
 import { customerOrg, customerTuToken, masterOrg, masterPaToken } from '../constants/mock-token';
 import { getToken } from '../core/auth/auth-client';

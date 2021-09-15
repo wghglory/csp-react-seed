@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import cspHeaderConfig from './utils/csp-header-config';
-import { changeOrganization, signIn, signOut } from './utils/csp';
-
-import { authorize, getToken } from '../../core/auth/auth-client';
+import cspHeaderConfig from './utils/cspHeaderConfig';
+import { changeOrganization, signIn, signOut } from '../../utils/csp';
 
 /**
  * All these imports come from the CSP Angular microfrontend. They are bundled as a separate entity
@@ -10,23 +8,22 @@ import { authorize, getToken } from '../../core/auth/auth-client';
  *
  * @ref https://ngx.eng.vmware.com/@vmw/csp-ngx-components/header/integration-guide#Non-Angular
  */
-import '@clr/ui/clr-ui.min.css'; // import for styles !!!!!!!!!
 import '@clr/icons/clr-icons.min.css';
-import '@clr/icons/clr-icons.min.js';
 import '@vmw/csp-header/csp-header';
+import '@clr/icons/clr-icons.min';
 
 // Custom styles required by the library
-// import styles from './CSPHeader.module.css';
+import './CSPHeader.module.css';
 
 /**
  * Mount the CSP Microfrontend using the csp-header custom component.
  */
 const CSPHeader = () => {
   // Keep the reference of the custom component
-  const headerRef = useRef<any>(null);
+  const headerRef = useRef(null);
 
   // Get customer auth token
-  const token = getToken()?.access_token;
+  const token = '';
 
   // Configure it
   useEffect(() => {
@@ -41,13 +38,8 @@ const CSPHeader = () => {
     ref.options = cspHeaderConfig.options;
 
     // Callbacks
-    ref.addEventListener('switchOrg', async (e: any) => {
+    ref.addEventListener('switchOrg', (e) => {
       changeOrganization(e.detail.id);
-
-      // TODO: update
-      await authorize(e.refLink);
-      // this.tokenService.authorize(org.refLink);
-      // await this.client.authorize(state, queryStringOrg || null);
     });
 
     ref.addEventListener('signOut', () => {
@@ -74,7 +66,7 @@ const CSPHeader = () => {
   // Add the token
   useEffect(() => {
     const { current: ref } = headerRef;
-    if (ref === null) {
+    if (ref == null) {
       return;
     }
 
@@ -85,11 +77,3 @@ const CSPHeader = () => {
 };
 
 export default CSPHeader;
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'csp-header-x': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-    }
-  }
-}
