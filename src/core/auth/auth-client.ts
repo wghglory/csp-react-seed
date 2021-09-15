@@ -2,7 +2,7 @@ import { OAuth2Client, JWT } from '@vmw/csp-oauth2';
 
 import { oauth2configuration } from './auth-config';
 import { IGNORE_CSP_HEADER_TOKEN, CSP_AUTH_TOKEN, CSP_ID_TOKEN } from '../../constants/csp';
-import { getQueryParam, removeQueryParam } from '../../utils/url-util';
+import { getQueryParam, removeQueryParam } from '../../utils/url';
 
 // 1. Initialize OAuth client and get token. No API call.
 export const client: OAuth2Client = new OAuth2Client(oauth2configuration);

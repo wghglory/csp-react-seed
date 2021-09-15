@@ -3,7 +3,7 @@ import './App.css';
 import CSPHeader from './components/CSPHeader';
 import CSPTokenSwitcher from './components/CSPTokenSwitcher';
 
-import http from './utils/axios-util';
+import http from './utils/axios';
 
 function App() {
   useEffect(() => {

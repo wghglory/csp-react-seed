@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import cspHeaderConfig from './utils/csp-header-config';
-import { changeOrganization, signIn, signOut } from './utils/csp-util';
+import { changeOrganization, signIn, signOut } from './utils/csp';
 
 import { authorize, getToken } from '../../core/auth/auth-client';
 
