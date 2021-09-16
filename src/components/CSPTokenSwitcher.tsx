@@ -10,7 +10,7 @@ ClarityIcons.addIcons(cogIcon);
 
 // TODO, to be removed. ONLY FOR DEV
 export default function CSPTokenSwitcher() {
-  const [authToken] = useState(getToken().access_token);
+  const [authToken] = useState(getToken()?.access_token);
   const [visible, setVisible] = useState(true);
   const [defaultToken, setDefaultToken] = useState(masterPaToken);
   const [customToken, setCustomToken] = useState('');
