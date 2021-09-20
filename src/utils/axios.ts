@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { client, authorize, isTokenExpired } from '../core/auth/auth-client';
+import { client, authorize, isTokenExpired } from '../core/auth/authClient';
 import { CSP_AUTH_TOKEN, IGNORE_CSP_HEADER_TOKEN } from '../constants/csp';
-import { masterPaToken } from '../constants/mock-token';
+import { masterPaToken } from '../constants/mockToken';
 
 const http = axios.create({
   baseURL: `${process.env.REACT_APP_PRODUCTION_HOST}/api/pcdl/v1/`,

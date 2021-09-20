@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { client, handleTokens } from './core/auth/auth-client';
+import { client, handleTokens } from './core/auth/authClient';
+import { removeQueryParam } from './utils/url';
 
 async function handleAuth() {
   return new Promise((resolve) => {
@@ -49,14 +50,3 @@ handleAuth().then(() => {
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-/*
- * Remove a querystring parameter from the browser address bar
- */
-function removeQueryParam(name: string) {
-  let url = window.location.href;
-  url = url
-    .replace(new RegExp('[?&]' + name + '=[^&#]*(#.*)?$'), '$1')
-    .replace(new RegExp('([?&])' + name + '=[^&]*&'), '$1');
-  window.history.pushState('', '', url);
-}
