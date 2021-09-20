@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import TheCspTokenSwitcher from './components/TheCspTokenSwitcher';
 import http from './utils/axios';
 
 // !!!!!!!! Must be the last one of all components import. Other components who deal with clarity icon go first.
-import TheCspHeader from './components/TheCspHeader';
+import TheHeader from './components/TheHeader';
 
 function App() {
   const [user, setUser] = useState('');
@@ -22,8 +21,7 @@ function App() {
 
   return (
     <div className='main-container'>
-      <TheCspHeader />
-      <TheCspTokenSwitcher />
+      <TheHeader />
       <div className='content-container'>
         <div className='content-area'>
           <pre>{user}</pre>

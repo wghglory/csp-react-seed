@@ -12,8 +12,7 @@ export function getQueryParam(name: string) {
  * Remove a querystring parameter from the browser address bar
  */
 export function removeQueryParam(name: string) {
-  let url = window.location.href;
-  url = url
+  const url = window.location.href
     .replace(new RegExp('[?&]' + name + '=[^&#]*(#.*)?$'), '$1')
     .replace(new RegExp('([?&])' + name + '=[^&]*&'), '$1');
   window.history.pushState('', '', url);

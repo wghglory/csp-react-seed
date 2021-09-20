@@ -1,4 +1,5 @@
 // http://alp-cloud-dev-ui.eng.vmware.com:8080/#/tenants
+// TODO: remove mock, make sure this is not in Prod. It appears in Dev and Stg
 
 export const masterOrg = {
   id: '39261999-a02b-4359-9b7d-c9aaaba84c61',
@@ -15,3 +16,6 @@ export const customerOrg = {
 
 export const customerTuToken =
   'eyJhbGciOiJub25lIn0.eyJzdWIiOiJ2bXdhcmVpZDpkNzlhNjVjMi0wMTczLTQ1YjYtODkyMy0xZDcwZDdjYWIwMTMiLCJpc3MiOiJodHRwczovL2dhei1wcmV2aWV3LmNzcC12aWRtLXByb2QuY29tIiwicGVybXMiOlsiZXh0ZXJuYWwvYWNhOTYxNGYtODhjMy00ZmIxLWJmZDktYTA4ZWFmNDVkMWMyL21zcDp0ZW5hbnRfYWRtaW4iLCJleHRlcm5hbC8zYTdlNGViNS1hYzg0LTQwNDEtYTAzMS0wMDNiZTEwZTNjMTUvYWxwOnRlbmFudF9hZG1pbiIsImV4dGVybmFsLzU2MWM3ZWMzLTdlNjktNDk3Yi1iODE5LWU1ZjY2NDRhZGI1ZC9wY2RsOnRlbmFudF9hZG1pbiJdLCJjb250ZXh0X25hbWUiOiIzNjNmMTU5Yi1kNDg1LTRmNWUtYTY5OS01MzM2NjU3NWE4YTQiLCJleHAiOjE3MDAwMDAwMDAsImp0aSI6IjcyYjZiOTUzLTM2NmItNDE5Ny04YTgxLWEzYzAxNGEyN2IxYiIsInVzZXJuYW1lIjoic29tZW9uZUAifQ.';
+
+export const IGNORE_CSP_HEADER_TOKEN = '__IGNORE_CSP_HEADER_TOKEN';
+export const IS_DEFAULT_ROLE = '__IS_DEFAULT_ROLE';

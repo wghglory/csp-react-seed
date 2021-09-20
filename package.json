@@ -2,6 +2,15 @@
   "name": "csp-react-seed",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem react-scripts start",
+    "build": "react-scripts build",
+    "build-csp": "REACT_APP_INTEGRATION_ENVIRONMENT=CSP &&react-scripts build",
+    "build-cds": "REACT_APP_INTEGRATION_ENVIRONMENT=CDS && react-scripts build",
+    "build-std": "REACT_APP_INTEGRATION_ENVIRONMENT=STD && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@cds/city": "^1.1.0",
     "@cds/core": "^5.5.4",
@@ -22,12 +31,6 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.4.2",
     "web-vitals": "^1.1.2"
-  },
-  "scripts": {
-    "start": "SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

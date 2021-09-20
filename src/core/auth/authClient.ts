@@ -1,7 +1,7 @@
 import { OAuth2Client, JWT } from '@vmw/csp-oauth2';
-
 import { oauth2configuration } from './authConfig';
-import { IGNORE_CSP_HEADER_TOKEN, CSP_AUTH_TOKEN, CSP_ID_TOKEN } from '../../constants/csp';
+import { CSP_AUTH_TOKEN, CSP_ID_TOKEN } from '../../constants/csp';
+import { IGNORE_CSP_HEADER_TOKEN } from '../../constants/mockToken';
 import { getQueryParam, removeQueryParam } from '../../utils/url';
 
 // 1. Initialize OAuth client and get token. No API call.
@@ -50,7 +50,7 @@ export async function validateOAuthResponse() {
 
 // Go to discovery page
 export async function authorize(queryStringOrg?: string, state = {}) {
-  // TODO, to be removed
+  // TODO, mock to be removed
   localStorage.removeItem(IGNORE_CSP_HEADER_TOKEN);
 
   // go to discovery
@@ -61,7 +61,7 @@ export async function authorize(queryStringOrg?: string, state = {}) {
 // Refresh a token
 async function refresh() {
   try {
-    // TODO, to be removed
+    // TODO, mock to be removed
     localStorage.removeItem(IGNORE_CSP_HEADER_TOKEN);
 
     // authorize API failed

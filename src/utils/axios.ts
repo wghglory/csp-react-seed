@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { client, authorize, isTokenExpired } from '../core/auth/authClient';
-import { CSP_AUTH_TOKEN, IGNORE_CSP_HEADER_TOKEN } from '../constants/csp';
-import { masterPaToken } from '../constants/mockToken';
+import { CSP_AUTH_TOKEN } from '../constants/csp';
+import { masterPaToken, IGNORE_CSP_HEADER_TOKEN } from '../constants/mockToken';
 
 const http = axios.create({
   baseURL: `${process.env.REACT_APP_PRODUCTION_HOST}/api/pcdl/v1/`,
@@ -16,8 +16,9 @@ http.interceptors.request.use(
     if (request.url && (!request.url.startsWith('http') || request.url.indexOf(window.location.host) !== -1)) {
       if (isTokenExpired()) {
         try {
-          // TODO, to be removed
+          // TODO, mock to be removed
           localStorage.removeItem(IGNORE_CSP_HEADER_TOKEN);
+
           // authorize API failed
           await client.refresh();
         } catch (e) {
@@ -32,7 +33,7 @@ http.interceptors.request.use(
       // const token = client.token();
       // request.headers.Authorization = `${token.token_type} ${token.access_token}`;
 
-      // TODO to be removed
+      // TODO, mock to be removed
       const ignoreToken = localStorage.getItem(IGNORE_CSP_HEADER_TOKEN);
       if (ignoreToken) {
         request.headers[CSP_AUTH_TOKEN] = ignoreToken;
@@ -40,7 +41,7 @@ http.interceptors.request.use(
         if (cspAuthToken) {
           request.headers[CSP_AUTH_TOKEN] = cspAuthToken;
         } else {
-          // TODO, to be removed
+          // TODO, mock to be removed
           request.headers[CSP_AUTH_TOKEN] = masterPaToken;
         }
       }

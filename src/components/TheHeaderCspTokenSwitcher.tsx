@@ -1,14 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CdsIcon } from '@cds/react/icon';
 import { ClarityIcons, cogIcon } from '@cds/core/icon';
-import { CSP_AUTH_TOKEN, IGNORE_CSP_HEADER_TOKEN, IS_DEFAULT_ROLE } from '../constants/csp';
-import { customerOrg, customerTuToken, masterOrg, masterPaToken } from '../constants/mockToken';
+import { CSP_AUTH_TOKEN } from '../constants/csp';
+import {
+  customerOrg,
+  customerTuToken,
+  masterOrg,
+  masterPaToken,
+  IGNORE_CSP_HEADER_TOKEN,
+  IS_DEFAULT_ROLE,
+} from '../constants/mockToken';
 import { getToken } from '../core/auth/authClient';
 
 ClarityIcons.addIcons(cogIcon);
 
 // TODO, to be removed. ONLY FOR DEV
-export default function TheCspTokenSwitcher() {
+export default function TheHeaderCspTokenSwitcher() {
   const [authToken] = useState(getToken()?.access_token);
   const [visible, setVisible] = useState(true);
   const [defaultToken, setDefaultToken] = useState(masterPaToken);
