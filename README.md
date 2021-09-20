@@ -84,4 +84,4 @@ Another ref:
 1. with clarity core v5.4.0, the icons cannot be loaded successfully if csp-header exists
 2. with clarity core v5.5.0, UI is broken with "cannot create proxy with a non-object as target or handler" error.
 
-To avoid above issues, please import `@vmw/csp-header` late after any other components who deal with clarity icon. Hence, as you see, in `App.tsx`, the `CspHeader` is imported at last.
+To avoid above issues, please import `@vmw/csp-header` late after any other components who deal with clarity icon. Hence, as you see, in `App.tsx`, the `TheHeader` is imported at last. And inside `TheHeader`, `import TheHeaderCsp from './TheHeaderCsp';` is placed at last.
