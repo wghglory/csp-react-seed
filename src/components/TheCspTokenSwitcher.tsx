@@ -8,7 +8,7 @@ import { getToken } from '../core/auth/authClient';
 ClarityIcons.addIcons(cogIcon);
 
 // TODO, to be removed. ONLY FOR DEV
-export default function CspTokenSwitcher() {
+export default function TheCspTokenSwitcher() {
   const [authToken] = useState(getToken()?.access_token);
   const [visible, setVisible] = useState(true);
   const [defaultToken, setDefaultToken] = useState(masterPaToken);

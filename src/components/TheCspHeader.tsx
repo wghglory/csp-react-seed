@@ -25,7 +25,7 @@ import '@vmw/csp-header/csp-header';
 /**
  * Mount the CSP Microfrontend using the csp-header custom component.
  */
-const CspHeader = () => {
+const TheCspHeader = () => {
   // Keep the reference of the custom component
   const headerRef = useRef<any>(null);
 
@@ -88,7 +88,7 @@ const CspHeader = () => {
   return <csp-header-x ref={headerRef}></csp-header-x>;
 };
 
-export default CspHeader;
+export default TheCspHeader;
 
 declare global {
   namespace JSX {
