@@ -1,50 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
 
-import { client, handleTokens } from './core/auth/authClient';
-import { removeQueryParam } from './utils/url';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-async function handleAuth() {
-  return new Promise((resolve) => {
-    // Page redirected from CSP discovery page will trigger a fully reload of application, so if block will be checked multiple times depending on how many redirects.
-    if (window.location.search.indexOf('code=') !== -1) {
-      client.validateAuthorizeResponse().then(
-        () => {
-          removeQueryParam('code');
-          removeQueryParam('state');
+import { i18nClient } from './i18n/i18nClient';
 
-          handleTokens();
+import './index.css';
 
-          resolve(true);
-        },
-        (error: any) => {
-          // CPN Devops needs to add PCDL as a service with PM approval, otherwise see below error
-          // error: "invalid_verifier"
-          // error_description: "Token verifier does not match.
-          alert(error);
-        },
-      );
+import App from './App';
+import { AppProviders } from './context';
 
-      return; // important, UI won't be rendered after validateAuthorizeResponse
-    }
+import { handleCspAuth } from './core/auth/authClient';
+import { isCspMode, PCDL_MODE, __PCDL_MODE__ } from './constants/common';
 
-    handleTokens();
-
-    resolve(true);
-  });
+function __setMode__() {
+  if (!PCDL_MODE) {
+    const mode = `${process.env.REACT_APP_INTEGRATION_MODE}`;
+    console.warn(`set PCDL Mode: ${mode}`);
+    localStorage.setItem(__PCDL_MODE__, mode);
+  }
 }
 
-handleAuth().then(() => {
+(async () => {
+  await i18nClient.coreService.loadI18nData();
+  if (isCspMode) {
+    await handleCspAuth();
+  }
+
+  // Dev only
+  if (process.env.NODE_ENV === 'development') {
+    __setMode__();
+  }
+
   ReactDOM.render(
-    <React.StrictMode>
+    <AppProviders>
       <App />
-    </React.StrictMode>,
+      <ReactQueryDevtools initialIsOpen={false} />
+    </AppProviders>,
     document.getElementById('root'),
   );
-});
+})();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

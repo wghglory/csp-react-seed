@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { cspHeaderConfig, LOGIN_URL } from '../constants/csp';
 import { authorize, getToken, revokeToken } from '../core/auth/authClient';
+import { useTheme } from '../context/ThemeContext';
+import { CspTheme } from '../theme';
+import { capitalize } from '../utils/common';
+import { CspHeaderConfig } from '../models/csp';
 
 /**
  * All these imports come from the CSP Angular microfrontend. They are bundled as a separate entity
@@ -28,63 +32,55 @@ import '@vmw/csp-header/csp-header';
 
 export default function TheHeaderCsp() {
   // Keep the reference of the custom component
-  const headerRef = useRef<any>(null);
+  const headerRef = useRef<HTMLElement & CspHeaderConfig>(null);
+  const [theme] = useTheme();
 
   // Get customer auth token
   const token = getToken()?.access_token;
 
-  // Configure it
-  useEffect(() => {
-    const { current: ref } = headerRef;
-    if (ref == null) {
-      return;
-    }
-
-    ref.environment = cspHeaderConfig.environment;
-    ref.currentLanguage = cspHeaderConfig.language;
-    ref.serviceRefLink = cspHeaderConfig.serviceRefLink;
-    ref.options = cspHeaderConfig.options;
-
-    // Callbacks
-    ref.addEventListener('switchOrg', async (e: any) => {
-      changeOrganization(e.detail.id);
-
-      // TODO: update
-      await authorize(e.refLink);
-      // this.tokenService.authorize(org.refLink);
-      // await this.client.authorize(state, queryStringOrg || null);
-    });
-
-    ref.addEventListener('signOut', () => {
-      signOut();
-    });
-
-    ref.addEventListener('signIn', () => {
-      signIn();
-    });
-
-    // Cleanup callbacks
-    return () => {
-      const { current: ref } = headerRef;
-      if (ref == null) {
-        return;
-      }
-
-      ref.removeEventListener('switchOrg');
-      ref.removeEventListener('signOut');
-      ref.removeEventListener('signIn');
-    };
-  }, [headerRef]);
-
-  // Add the token
+  // Configure it initially
   useEffect(() => {
     const { current: ref } = headerRef;
     if (ref === null) {
       return;
     }
 
+    ref.environment = cspHeaderConfig.environment;
+    ref.currentLanguage = cspHeaderConfig.currentLanguage;
+    ref.serviceRefLink = cspHeaderConfig.serviceRefLink;
+    ref.options = cspHeaderConfig.options;
+
+    ref.addEventListener('switchOrg', switchOrg);
+    ref.addEventListener('signOut', signOut);
+    ref.addEventListener('signIn', signIn);
+
+    return () => {
+      ref.removeEventListener('switchOrg', switchOrg);
+      ref.removeEventListener('signOut', signOut);
+      ref.removeEventListener('signIn', signIn);
+    };
+  }, []);
+
+  // Add the token
+  useEffect(() => {
+    const { current: ref } = headerRef;
+
+    if (ref === null) {
+      return;
+    }
+
     ref.authToken = token;
-  }, [headerRef, token]);
+  }, [token]);
+
+  // Change Csp theme. Separate 3 useEffect so as to avoid multiple addEventListener registrations
+  useEffect(() => {
+    const { current: ref } = headerRef;
+    if (ref === null) {
+      return;
+    }
+
+    ref.options = { ...cspHeaderConfig.options, theme: capitalize(theme) as CspTheme };
+  }, [theme]);
 
   return <csp-header-x ref={headerRef}></csp-header-x>;
 }
@@ -123,3 +119,12 @@ const signOut = async () => {
 const signIn = () => {
   window.location.assign(LOGIN_URL);
 };
+
+async function switchOrg(e: any) {
+  changeOrganization(e.detail.id);
+
+  // TODO: update
+  await authorize(e.refLink);
+  // this.tokenService.authorize(org.refLink);
+  // await this.client.authorize(state, queryStringOrg || null);
+}

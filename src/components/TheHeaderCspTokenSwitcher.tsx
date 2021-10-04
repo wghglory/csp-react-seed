@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CdsIcon } from '@cds/react/icon';
 import { ClarityIcons, cogIcon } from '@cds/core/icon';
+import { CdsRadio } from '@cds/react/radio';
+import { CdsInput } from '@cds/react/input';
+
 import { CSP_AUTH_TOKEN } from '../constants/csp';
 import {
   customerOrg,
@@ -101,6 +104,7 @@ export default function TheHeaderCspTokenSwitcher() {
       {visible && (
         <nav className='subnav'>
           <form
+            className='w-full'
             onSubmit={(e) => {
               e.preventDefault();
               switchRole(customToken, true);
@@ -108,7 +112,8 @@ export default function TheHeaderCspTokenSwitcher() {
           >
             <ul className='nav'>
               <li className='nav-item'>
-                <div className='clr-radio-wrapper'>
+                <CdsRadio>
+                  <label title={masterOrg.name}>Default Provider User</label>
                   <input
                     onChange={(e) => {
                       setCustomToken('');
@@ -117,18 +122,15 @@ export default function TheHeaderCspTokenSwitcher() {
                     }}
                     checked={defaultToken === masterPaToken}
                     type='radio'
-                    id='default-provider-input'
                     name='radio-full'
                     value={masterPaToken}
                     className='clr-radio'
                   />
-                  <label title={masterOrg.name} htmlFor='default-provider-input' className='clr-control-label'>
-                    Default Provider User
-                  </label>
-                </div>
+                </CdsRadio>
               </li>
               <li className='nav-item'>
-                <div className='clr-radio-wrapper'>
+                <CdsRadio>
+                  <label title={customerOrg.name}>Default Tenant User</label>
                   <input
                     onChange={(e) => {
                       setCustomToken('');
@@ -137,18 +139,15 @@ export default function TheHeaderCspTokenSwitcher() {
                     }}
                     checked={defaultToken === customerTuToken}
                     type='radio'
-                    id='default-tenant-input'
                     name='radio-full'
                     value={customerTuToken}
                     className='clr-radio'
                   />
-                  <label title={customerOrg.name} htmlFor='default-tenant-input' className='clr-control-label'>
-                    Default Tenant User
-                  </label>
-                </div>
+                </CdsRadio>
               </li>
               <li className='nav-item'>
-                <div className='clr-radio-wrapper'>
+                <CdsRadio>
+                  <label>CSP Header User</label>
                   <input
                     onChange={(e) => {
                       setCustomToken('');
@@ -157,18 +156,24 @@ export default function TheHeaderCspTokenSwitcher() {
                     }}
                     checked={defaultToken === authToken}
                     type='radio'
-                    id='csp-header-input'
                     name='radio-full'
                     value={authToken}
                     className='clr-radio'
                   />
-                  <label htmlFor='csp-header-input' className='clr-control-label'>
-                    CSP Header User
-                  </label>
-                </div>
+                </CdsRadio>
               </li>
-              <li className='nav-item'>
-                <div className='clr-radio-wrapper'>
+              <li className='nav-item' style={{ display: 'flex', alignItems: 'center' }}>
+                <CdsRadio>
+                  <label htmlFor='custom-csp-input'>
+                    Custom CSP User
+                    {/* <input
+                      className='clr-input'
+                      name='token'
+                      value={customToken}
+                      onChange={(e) => setCustomToken(e.target.value)}
+                      placeholder="Input CSP token and press 'Enter'"
+                    /> */}
+                  </label>
                   <input
                     onChange={() => {
                       switchRole(customToken, true);
@@ -180,17 +185,18 @@ export default function TheHeaderCspTokenSwitcher() {
                     className='clr-radio'
                     value='custom-token'
                   />
-                  <label htmlFor='custom-csp-input' className='clr-control-label'>
-                    Custom CSP User
-                    <input
-                      className='clr-input'
-                      name='token'
-                      value={customToken}
-                      onChange={(e) => setCustomToken(e.target.value)}
-                      placeholder="Input CSP token and press 'Enter'"
-                    />
-                  </label>
-                </div>
+                </CdsRadio>
+
+                <CdsInput layout='horizontal'>
+                  <input
+                    style={{ minWidth: '166px' }}
+                    aria-label='custom-csp-input'
+                    name='token'
+                    value={customToken}
+                    onChange={(e) => setCustomToken(e.target.value)}
+                    placeholder="type token, press 'Enter'"
+                  />
+                </CdsInput>
               </li>
             </ul>
           </form>

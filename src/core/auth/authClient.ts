@@ -90,13 +90,6 @@ export async function handleTokens() {
         refresh();
       }
     }
-    // TODO: Do we need set localStorage here?
-    // window.localStorage.setItem(CSP_AUTH_TOKEN, token.access_token);
-    // window.localStorage.setItem(CSP_ID_TOKEN, token.id_token);
-    // window.localStorage.setItem('csp-instance', 'stg');
-
-    // cspTokenService.authToken = token.access_token;
-    // permissionService.parseToken(token.access_token);
   }
 }
 
@@ -144,4 +137,34 @@ export function getTokenClaims() {
   // console.log(idToken.family_name);            // User family name
   // console.log(idToken.email);                  // User email address
   // console.log(idToken.context_name);           // CSP Organization ID
+}
+
+export async function handleCspAuth() {
+  return new Promise((resolve) => {
+    // Page redirected from CSP discovery page will trigger a fully reload of application, so if block will be checked multiple times depending on how many redirects.
+    if (window.location.search.indexOf('code=') !== -1) {
+      client.validateAuthorizeResponse().then(
+        () => {
+          removeQueryParam('code');
+          removeQueryParam('state');
+
+          handleTokens();
+
+          resolve(true);
+        },
+        (error: any) => {
+          // CPN Devops needs to add PCDL as a service with PM approval, otherwise see below error
+          // error: "invalid_verifier"
+          // error_description: "Token verifier does not match.
+          console.error(error);
+        },
+      );
+
+      return; // important, UI won't be rendered after validateAuthorizeResponse
+    }
+
+    handleTokens();
+
+    resolve(true);
+  });
 }

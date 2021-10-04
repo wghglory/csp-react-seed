@@ -2,3 +2,124 @@
 @import '~@cds/core/global.css';
 /* @import '~@cds/core/styles/module.shims.css'; */
 @import '~@cds/city/css/bundles/default.min.css';
+
+/* dark theme needs to apply cds-theme="dark" to body */
+@import '~@cds/core/styles/theme.dark.css';
+
+/* --------------------- Clarity subnav start --------------------- */
+.subnav {
+  display: flex;
+  box-shadow: 0 -0.05rem 0 #cccccc inset;
+  box-shadow: 0 -0.05rem 0 var(--clr-nav-box-shadow-color, #cccccc) inset;
+  justify-content: space-between;
+  align-items: center;
+  /* clr-subnav-bg-color */
+  background-color: white;
+  background-color: var(--clr-subnav-bg-color, white);
+  height: 1.8rem;
+}
+.sub-nav .nav,
+.subnav .nav {
+  flex: 1 1 auto;
+  padding-left: 1.2rem;
+}
+
+.nav {
+  display: flex;
+  height: 1.8rem;
+  list-style-type: none;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+  white-space: nowrap;
+  box-shadow: 0 -0.05rem 0 #cccccc inset;
+  box-shadow: 0 -0.05rem 0 var(--clr-nav-box-shadow-color, #cccccc) inset;
+}
+.nav .nav-item {
+  display: inline-block;
+  margin-right: 1.2rem;
+}
+.nav .nav-item.active > .nav-link {
+  /* clr-nav-link-active-color */
+  color: black;
+  color: var(--clr-nav-link-active-color, black);
+  box-shadow: 0 -0.05rem 0 #cccccc inset;
+  box-shadow: 0 -0.05rem 0 var(--clr-nav-box-shadow-color, #cccccc) inset;
+}
+.nav .nav-link {
+  /* clr-nav-link-color */
+  color: #8c8c8c;
+  color: var(--clr-nav-link-color, #8c8c8c);
+  font-size: 0.7rem;
+  /* clr-nav-link-font-weight */
+  font-weight: 400;
+  font-weight: var(--clr-nav-link-font-weight, 400);
+  letter-spacing: normal;
+  line-height: 1.8rem;
+  display: inline-block;
+  padding: 0 0.15rem;
+  box-shadow: none;
+}
+.nav .nav-link.btn {
+  text-transform: none;
+  margin: 0;
+  margin-bottom: -0.05rem;
+  border-radius: 0;
+}
+.nav .nav-link:hover,
+.nav .nav-link:focus,
+.nav .nav-link:active {
+  color: inherit;
+}
+.nav .nav-link:hover,
+.nav .nav-link.active {
+  box-shadow: 0 -0.15rem 0 #0072a3 inset;
+  box-shadow: 0 -0.15rem 0 var(--clr-nav-active-box-shadow-color, #0072a3) inset;
+  transition: box-shadow 0.2s ease-in;
+}
+.nav .nav-link:hover,
+.nav .nav-link:focus,
+.nav .nav-link:active,
+.nav .nav-link.active {
+  text-decoration: none;
+}
+.nav .nav-link.active {
+  /* clr-nav-link-active-color */
+  color: black;
+  color: var(--clr-nav-link-active-color, black);
+  /* clr-nav-link-active-font-weight */
+  font-weight: 400;
+  font-weight: var(--clr-nav-link-active-font-weight, 400);
+}
+.nav .nav-link.nav-item {
+  margin-right: 1.2rem;
+}
+
+[cds-theme~='dark'] .subnav {
+  background-color: #17242b;
+  /* clarity angular uses #ccc for both dark and light */
+  box-shadow: 0 -0.05rem 0 #495865 inset;
+}
+
+[cds-theme~='dark'] .nav {
+  box-shadow: 0 -0.05rem 0 #495865 inset;
+}
+
+[cds-theme~='dark'] .nav .nav-item.active > .nav-link {
+  /* clr-nav-link-active-color */
+  color: white;
+  box-shadow: 0 -0.05rem 0 #495865 inset;
+}
+[cds-theme~='dark'] .nav .nav-link {
+  /* clr-nav-link-color */
+  color: #acbac3;
+}
+[cds-theme~='dark'] .nav .nav-link:hover,
+[cds-theme~='dark'] .nav .nav-link.active {
+  box-shadow: 0 -0.15rem 0 #4aaed9 inset;
+}
+[cds-theme~='dark'] .nav .nav-link.active {
+  /* clr-nav-link-active-color */
+  color: white;
+}
+/* --------------------- Clarity subnav end --------------------- */
