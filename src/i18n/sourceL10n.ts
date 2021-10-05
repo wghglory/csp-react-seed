@@ -12,6 +12,12 @@ const common = {
   AZURE_NEW_DIRECTORY_CONSENT: 'Consent to transfer the subscription <strong>(Do not enable 2FA)</strong>',
   AZURE_NEW_DIRECTORY_ADMIN_CONSENT: 'Consent to allow the new tenant to access Azure services',
 
+  'common.region': 'Region',
+  'common.accountId': 'Account ID',
+  'common.accessKey': 'Access Key',
+  'common.secretKey': 'Secret Key',
+  'common.platform': 'Platform',
+  'common.platformStatus': 'Platform Status',
   'common.retry': 'Retry',
   'common.selectAll': 'Select All',
   'common.confirm': 'Confirm',
@@ -51,21 +57,19 @@ const common = {
   'common.total': 'Total {0} items',
   'common.ready': 'Ready',
   'common.notSet': 'Not Set',
-};
-
-const auth = {
-  'auth.login': 'Sign In',
-  'auth.token': 'Token',
-  'auth.logout': 'Logout',
-  'auth.checkingUserInfo': 'Checking user information...',
+  'common.discard': 'Discard',
+  'common.subscriptions': 'Subscriptions',
+  'common.signin': 'Sign In',
+  'common.token': 'Token',
+  'common.logout': 'Logout',
+  'common.checkingUserInfo': 'Checking user information...',
+  'common.manageServices': 'Manage Services',
+  'common.provisionedServices': 'Provisioned Services',
+  'common.unavailableServices': 'Services Available for Provisioning',
 };
 
 const cloudConnection = {
   'cloudConnection.addConnection': 'Add Cloud Connection',
-  'cloudConnection.region': 'Region',
-  'cloudConnection.accountId': 'Account ID',
-  'cloudConnection.accessKey': 'Access Key',
-  'cloudConnection.secretKey': 'Secret Key',
   'cloudConnection.masterSubscriptionId': 'Subscription ID',
   'cloudConnection.clientId': 'Application (client) ID',
   'cloudConnection.clientSecret': 'Application (client) Secret',
@@ -83,7 +87,6 @@ const cloudConnection = {
   'cloudConnection.disconnectionSuccess': 'Disconnect successfully.',
   'cloudConnection.gotoAzure': 'PROCEED ON AZURE',
   'cloudConnection.loadingCallbackURL': 'Loading Prerequisite...',
-  'cloudConnection.discard': 'Discard',
   'cloudConnection.azureDesc':
     'Microsoft Azure is a cloud computing service created by Microsoft for building, testing, deploying, and managing applications and services through Microsoft-managed data centers.',
   'cloudConnection.awsDesc':
@@ -112,9 +115,6 @@ const tenant = {
   'tenant.loadingTenant': 'Loading Tenant...',
   'tenant.serviceCount': 'Service Count',
   'tenant.userCount': 'User Count',
-  'tenant.manageService': 'Manage Service',
-  'tenant.platform': 'Platform',
-  'tenant.notSet': 'Not Set',
   'tenant.onboard': 'Onboard',
   'tenant.onboarding': 'Onboarding',
   'tenant.onboardTitle': 'Onboard {0}',
@@ -134,7 +134,6 @@ const tenant = {
   'tenant.transferSubscription': 'Transfer Subscription',
   'tenant.transferSubscriptionDesc':
     'The subscription is assigned to tenant <strong>{0}</strong>. Please confirm the subscription transfer step by step. The transfer may take minutes to hours to complete.',
-  'tenant.subscriptions': 'Subscriptions',
   'tenant.unsubscribeTip':
     "To finish resetting the tenant, please click below link and change directory back to the home directory. It usually takes more than 10 minutes to take effect after transferring subscription back in the Azure portal. <br /><a href={0} target='_blank'>{0}</a>",
   'tenant.activateTitle': 'Activate Tenant',
@@ -145,15 +144,7 @@ const tenant = {
   'tenant.resetContent':
     'Please confirm if you want to reset tenant <strong>{0}</strong>. You may need to go to Azure portal and transfer subscription back to the home directory.',
   'tenant.dragAndDropClue': 'You can drag and drop services here',
-  'tenant.manageServices': 'Manage Services',
-  'tenant.provisionedServices': 'Provisioned Services',
-  'tenant.unavailableServices': 'Services Available for Provisioning',
   'tenant.failToUpdateService': 'Failed to update service. Service list will roll back.',
-};
-
-const platform = {
-  'platform.status': 'Platform Status',
-  'platform.platform': 'Platform',
 };
 
 const cloudServices = {
@@ -162,11 +153,26 @@ const cloudServices = {
   'cloudService.openPortal': 'Open Portal',
 };
 
+const home = {
+  'home.title': 'Accelerate Your Journey to Public Cloud',
+  'home.subtitle': 'Deliver multi-tenancy public cloud native clouds to your Managed Clouds.',
+  'home.section1Title': 'Integrate with MSP',
+  'home.section1Content':
+    'Seamlessly integrate with VMware Managed Service Provider clouds, including Cloud Partner Navigator and Cloud Director Service.',
+  'home.section2Title': 'Connect to Public Cloud',
+  'home.section2Content':
+    'Support popular public clouds, including Amazon Webservices, Google Cloud Platform, Microsoft Azure and so on.',
+  'home.section3Title': 'Offer Numerous Native Services',
+  'home.section3Content':
+    'With public cloud connected, numerous native services and industry solutions can be delivered to tenant customers.',
+  'home.section4Title': 'Generate Usage and Billing',
+  'home.section4Content': 'Provider gets consolidated usage report and monthly billing checks for every customer.',
+};
+
 export const ENGLISH = {
   ...common,
-  ...auth,
   ...cloudConnection,
   ...tenant,
-  ...platform,
   ...cloudServices,
+  ...home,
 };

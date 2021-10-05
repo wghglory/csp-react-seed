@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useHistory } from 'react-router';
 import { cspHeaderConfig, LOGIN_URL } from '../constants/csp';
 import { authorize, getToken, revokeToken } from '../core/auth/authClient';
 import { useTheme } from '../context/ThemeContext';
@@ -17,11 +18,11 @@ import '@clr/ui/clr-ui.min.css'; // only for CSP header style
 import '@clr/icons/clr-icons.min.css';
 import '@clr/icons/clr-icons.min.js';
 
-// !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
-// This import may conflict with Clarity, so it has to be loaded late after the clarity icon,
-// otherwise the clarity icon is broken. e.g. `ClarityIcons.addIcons(cogIcon);`
-import '@vmw/csp-header/csp-header';
-// !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
+// // !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
+// // This import may conflict with Clarity, so it has to be loaded late after the clarity icon,
+// // otherwise the clarity icon is broken. e.g. `ClarityIcons.addIcons(cogIcon);`
+// import '@vmw/csp-header/csp-header';
+// // !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
 
 // Custom styles required by the library
 // import styles from './CSPHeader.module.css';
@@ -34,12 +35,22 @@ export default function TheHeaderCsp() {
   // Keep the reference of the custom component
   const headerRef = useRef<HTMLElement & CspHeaderConfig>(null);
   const [theme] = useTheme();
+  const { push } = useHistory();
 
   // Get customer auth token
   const token = getToken()?.access_token;
 
   // Configure it initially
   useEffect(() => {
+    // require('@clr/ui/clr-ui.min.css'); // only for CSP header style
+    // require('@clr/icons/clr-icons.min.css');
+    // require('@clr/icons/clr-icons.min.js');
+    // !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
+    // This import may conflict with Clarity, so it has to be loaded late after the clarity icon,
+    // otherwise the clarity icon is broken. e.g. `ClarityIcons.addIcons(cogIcon);`
+    require('@vmw/csp-header/csp-header');
+    // !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
+
     const { current: ref } = headerRef;
     if (ref === null) {
       return;
@@ -81,6 +92,28 @@ export default function TheHeaderCsp() {
 
     ref.options = { ...cspHeaderConfig.options, theme: capitalize(theme) as CspTheme };
   }, [theme]);
+
+  // Clicking logo can jump to /
+  useEffect(() => {
+    const { current: ref } = headerRef;
+    if (ref === null) {
+      return;
+    }
+
+    function pushHome() {
+      push('/');
+    }
+
+    const timer = setTimeout(() => {
+      const links = ref.querySelectorAll('a');
+      links.forEach((l) => l.addEventListener('click', pushHome, false));
+
+      return () => {
+        links.forEach((l) => l.removeEventListener('click', pushHome, false));
+        clearTimeout(timer);
+      };
+    }, 2000);
+  }, [push]);
 
   return <csp-header-x ref={headerRef}></csp-header-x>;
 }

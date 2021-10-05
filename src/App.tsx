@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { Route, Switch, useLocation } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 import routeConfig from './routes/routeConfig';
 
@@ -13,7 +13,6 @@ import TheHeader from './components/TheHeader';
 
 function App() {
   const { getUser } = useAuth();
-  const { pathname } = useLocation();
 
   useEffect(() => {
     // based on env, get token. if there's a token, get current user
@@ -29,8 +28,7 @@ function App() {
   return (
     <div cds-layout='vertical align:horizontal-stretch' style={{ height: '100vh' }}>
       <Suspense fallback={<div>loading</div>}>
-        {!['/login', '/auth'].includes(pathname) && <TheHeader />}
-
+        <TheHeader />
         <div className='content-container'>
           <div className='content-area'>
             <Switch>

@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@cds/city": "^1.1.0",
-    "@cds/core": "^5.5.4",
-    "@cds/react": "^5.5.4",
+    "@cds/core": "^5.5.7",
+    "@cds/react": "^5.5.7",
     "@clr/icons": "^12.0.5",
     "@clr/ui": "^12.0.5",
     "@singleton-i18n/js-core-sdk": "^0.5.2",
