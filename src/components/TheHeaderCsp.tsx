@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { useHistory } from 'react-router';
-import { cspHeaderConfig, LOGIN_URL } from '../constants/csp';
-import { authorize, getToken, revokeToken } from '../core/auth/authClient';
-import { useTheme } from '../context/ThemeContext';
-import { CspTheme } from '../theme';
-import { capitalize } from '../utils/common';
-import { CspHeaderConfig } from '../models/csp';
+import React, {useEffect, useRef} from 'react';
+import {useNavigate} from 'react-router';
+import {cspHeaderConfig, LOGIN_URL} from '../constants/csp';
+import {authorize, getToken, revokeToken} from '../core/auth/authClient';
+import {useTheme} from '../context/ThemeContext';
+import {CspTheme} from '../theme';
+import {capitalize} from '../utils/common';
+import {CspHeaderConfig} from '../models/csp';
 
 /**
  * All these imports come from the CSP Angular microfrontend. They are bundled as a separate entity
@@ -35,7 +35,7 @@ export default function TheHeaderCsp() {
   // Keep the reference of the custom component
   const headerRef = useRef<HTMLElement & CspHeaderConfig>(null);
   const [theme] = useTheme();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   // Get customer auth token
   const token = getToken()?.access_token;
@@ -51,7 +51,7 @@ export default function TheHeaderCsp() {
     require('@vmw/csp-header/csp-header');
     // !!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!
 
-    const { current: ref } = headerRef;
+    const {current: ref} = headerRef;
     if (ref === null) {
       return;
     }
@@ -74,7 +74,7 @@ export default function TheHeaderCsp() {
 
   // Add the token
   useEffect(() => {
-    const { current: ref } = headerRef;
+    const {current: ref} = headerRef;
 
     if (ref === null) {
       return;
@@ -85,23 +85,23 @@ export default function TheHeaderCsp() {
 
   // Change Csp theme. Separate 3 useEffect so as to avoid multiple addEventListener registrations
   useEffect(() => {
-    const { current: ref } = headerRef;
+    const {current: ref} = headerRef;
     if (ref === null) {
       return;
     }
 
-    ref.options = { ...cspHeaderConfig.options, theme: capitalize(theme) as CspTheme };
+    ref.options = {...cspHeaderConfig.options, theme: capitalize(theme) as CspTheme};
   }, [theme]);
 
   // Clicking logo can jump to /
   useEffect(() => {
-    const { current: ref } = headerRef;
+    const {current: ref} = headerRef;
     if (ref === null) {
       return;
     }
 
     function pushHome() {
-      push('/');
+      navigate('/');
     }
 
     const timer = setTimeout(() => {
@@ -113,7 +113,7 @@ export default function TheHeaderCsp() {
         clearTimeout(timer);
       };
     }, 2000);
-  }, [push]);
+  }, [navigate]);
 
   return <csp-header-x ref={headerRef}></csp-header-x>;
 }

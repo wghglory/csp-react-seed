@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 `npx create-react-app csp-react-seed --template typescript`
 
-- create-react-app: 4.0.3
+- create-react-app: 5.0.1
 - node: 16.8.0
 - npm: 7.21.0
 
@@ -18,7 +18,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 2. Make sure client registry have redirectUris https://pcdl-stg.vmware.com:3300
 
-Postman, `PATCH https://console-stg.cloud.vmware.com/csp/gateway/am/api/orgs/{{service_org_id}}/oauth-apps/{{oauth_client}}` with `csp-auth-token`
+Postman,
+`PATCH https://console-stg.cloud.vmware.com/csp/gateway/am/api/orgs/{{service_org_id}}/oauth-apps/{{oauth_client}}` with
+`csp-auth-token`
 
 Request Body:
 
@@ -84,4 +86,6 @@ Another ref:
 1. with clarity core v5.4.0, the icons cannot be loaded successfully if csp-header exists
 2. with clarity core v5.5.0, UI is broken with "cannot create proxy with a non-object as target or handler" error.
 
-To avoid above issues, please import `@vmw/csp-header` late after any other components who deal with clarity icon. Hence, as you see, in `App.tsx`, the `TheHeader` is imported at last. And inside `TheHeader`, `import TheHeaderCsp from './TheHeaderCsp';` is placed at last.
+To avoid above issues, please import `@vmw/csp-header` late after any other components who deal with clarity icon.
+Hence, as you see, in `App.tsx`, the `TheHeader` is imported at last. And inside `TheHeader`,
+`import TheHeaderCsp from './TheHeaderCsp';` is placed at last.

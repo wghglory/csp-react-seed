@@ -1,5 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* @import '~modern-normalize.css/modern-normalize.css';  */
-@import '~@cds/core/global.css';
+@import '~@cds/core/global.min.css';
 /* @import '~@cds/core/styles/module.shims.css'; */
 @import '~@cds/city/css/bundles/default.min.css';
 

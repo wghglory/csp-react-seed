@@ -1,18 +1,18 @@
 import React from 'react';
 import reportWebVitals from './reportWebVitals';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
-import { ReactQueryDevtools } from 'react-query/devtools';
+import {ReactQueryDevtools} from 'react-query/devtools';
 
-import { i18nClient } from './i18n/i18nClient';
+import {i18nClient} from './i18n/i18nClient';
 
 import './index.css';
 
 import App from './App';
-import { AppProviders } from './context';
+import {AppProviders} from './context';
 
-import { handleCspAuth } from './core/auth/authClient';
-import { isCspMode, PCDL_MODE, __PCDL_MODE__ } from './constants/common';
+import {handleCspAuth} from './core/auth/authClient';
+import {isCspMode, PCDL_MODE, __PCDL_MODE__} from './constants/common';
 
 function __setMode__() {
   if (!PCDL_MODE) {
@@ -33,12 +33,11 @@ function __setMode__() {
     __setMode__();
   }
 
-  ReactDOM.render(
+  ReactDOM.createRoot(document.getElementById('root')!).render(
     <AppProviders>
       <App />
       <ReactQueryDevtools initialIsOpen={false} />
     </AppProviders>,
-    document.getElementById('root'),
   );
 })();
 

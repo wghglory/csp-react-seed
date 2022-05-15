@@ -1,8 +1,7 @@
-import React, { lazy } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import React, {lazy} from 'react';
 
 import HomePage from '../pages/HomePage';
-import { PATH_ABOUT, PATH_API_TOKEN, PATH_CLOUD_CONNECTION, PATH_CLOUD_SERVICE, PATH_TENANTS } from './const';
+import {PATH_ABOUT, PATH_API_TOKEN, PATH_CLOUD_CONNECTION, PATH_CLOUD_SERVICE, PATH_TENANTS} from './const';
 
 // PA
 const ConnectionPage = lazy(() => import('../pages/ConnectionPage'));
@@ -20,48 +19,46 @@ const NoAccessPage = lazy(() => import('../pages/NoAccessPage'));
 
 interface RouteItem {
   path: string;
-  exact?: boolean;
-  component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+  element: JSX.Element;
 }
 
 // NOTE: order matters due to menu order, may consider separate Route and Navigation Menu
 const routeConfig: RouteItem[] = [
   {
     path: '/',
-    exact: true,
-    component: HomePage,
+    element: <HomePage />,
   },
   {
     path: PATH_CLOUD_CONNECTION,
-    component: ConnectionPage,
+    element: <ConnectionPage />,
   },
   {
     path: PATH_TENANTS,
-    component: TenantPage,
+    element: <TenantPage />,
   },
   {
     path: PATH_CLOUD_SERVICE,
-    component: ServicePage,
+    element: <ServicePage />,
   },
   {
     path: PATH_API_TOKEN,
-    component: TokenPage,
+    element: <TokenPage />,
   },
   {
     path: PATH_ABOUT,
-    component: AboutPage,
+    element: <AboutPage />,
   },
   {
     path: '/login',
-    component: LoginPage,
+    element: <LoginPage />,
   },
   {
     path: '/no-access',
-    component: NoAccessPage,
+    element: <NoAccessPage />,
   },
   {
-    path: '*',
-    component: NotFoundPage,
+    path: '**',
+    element: <NotFoundPage />,
   },
 ];
 

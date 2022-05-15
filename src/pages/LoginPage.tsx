@@ -1,14 +1,14 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import React, {FormEvent, useEffect, useState} from 'react';
+import {useNavigate, useLocation} from 'react-router';
 
 import style from './LoginPage.module.css';
 
-import { CdsFormGroup } from '@cds/react/forms';
-import { CdsInput } from '@cds/react/input';
+import {CdsFormGroup} from '@cds/react/forms';
+import {CdsInput} from '@cds/react/input';
 
-import { l10n } from '../i18n/i18nUtils';
+import {l10n} from '../i18n/i18nUtils';
 
-import { useAuth } from '../context/AuthContext';
+import {useAuth} from '../context/AuthContext';
 
 /**
  * This login page is a standalone vCD login page!
@@ -19,9 +19,9 @@ import { useAuth } from '../context/AuthContext';
  */
 export default function LoginPage() {
   const [token, setToken] = useState('');
-  const { replace } = useHistory();
-  const { state } = useLocation();
-  const { user, isLoading, getUser, logout, error } = useAuth();
+  const navigate = useNavigate();
+  const {state} = useLocation();
+  const {user, isLoading, getUser, logout, error} = useAuth();
 
   // If user already login, navigate to his previous from page or home without recording browser history
   // 1. user may previously review /tenants page without login, withAuthorizationGuard will kick user to login, and after login, navigate back to that state from.
@@ -30,26 +30,26 @@ export default function LoginPage() {
   useEffect(() => {
     if (user) {
       const path = (state as any)?.from || '/';
-      replace(path);
+      navigate(path, {replace: true});
     }
-  }, [replace, state, user]);
+  }, [navigate, state, user]);
 
   function submit(e: FormEvent) {
     e.preventDefault();
-    getUser({ authMethod: 'CDS_CREDENTIAL', token });
+    getUser({authMethod: 'CDS_CREDENTIAL', token});
   }
 
   return (
     <div className={style.loginWrapper}>
       <div className={style.login}>
-        <h1 cds-text='title' className={`${style.title} mb-8`}>
+        <h1 cds-text="title" className={`${style.title} mb-8`}>
           {l10n('common.product')}
         </h1>
         {/* <h3>{l10n('login.subtitle')}</h3> */}
         <form className={style.loginGroup} onSubmit={submit}>
-          <CdsFormGroup layout='vertical'>
-            <CdsInput layout='vertical'>
-              <label style={{ visibility: 'hidden' }}>{l10n('auth.token')}</label>
+          <CdsFormGroup layout="vertical">
+            <CdsInput layout="vertical">
+              <label style={{visibility: 'hidden'}}>{l10n('auth.token')}</label>
               <input
                 placeholder={l10n('auth.token')}
                 required
@@ -61,12 +61,12 @@ export default function LoginPage() {
           </CdsFormGroup>
 
           {error && (
-            <p className='mt-6' onClick={() => logout()}>
+            <p className="mt-6" onClick={() => logout()}>
               {error.message}
             </p>
           )}
 
-          <button id='login' className='mt-6' disabled={isLoading || token === ''} type='submit'>
+          <button id="login" className="mt-6" disabled={isLoading || token === ''} type="submit">
             {l10n('auth.login')}
           </button>
         </form>
